@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users(
     email TEXT UNIQUE NOT NULL,
     username TEXT UNIQUE NOT NULL,
     hash TEXT NOT NULL,
-    birthdate DATE NOT NULL,
+    birthdate DATE,
     active BOOLEAN NOT NULL DEFAULT FALSE,
     confirmation_token TEXT DEFAULT NULL,
     profile_pic TEXT DEFAULT NULL,
