@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users(
     hash TEXT NOT NULL,
     birthdate DATE,
     active BOOLEAN NOT NULL DEFAULT FALSE,
-    confirmation_token TEXT DEFAULT NULL,
+    confirmation_token TEXT,
     profile_pic TEXT DEFAULT NULL,
     bio TEXT DEFAULT '',
     deleted BOOLEAN DEFAULT FALSE,

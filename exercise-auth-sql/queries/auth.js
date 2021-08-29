@@ -1,12 +1,12 @@
 const {sql} = require('slonik');
 
-const createUser = async(db, email, username, hash) => {
+const createUser = async(db, email, username, hash, confirmation_token) => {
     try {
         return await db.query(sql
             `INSERT INTO users(
-                email, username, hash
+                email, username, hash, confirmation_token
             )VALUES( 
-                ${email}, ${username}, ${hash}
+                ${email}, ${username}, ${hash}, ${confirmation_token}
             )`
         );
     } catch (error) {
@@ -21,7 +21,8 @@ const getUser = async (db, email, fn) => {
             `
                 SELECT email, username, hash
                 FROM users
-                WHERE email LIKE ${email} 
+                WHERE email LIKE ${email} AND
+                active=true 
             `);
 
         if (!result) throw new Error('mail incorrecto. Más adelante modificaré el texto');
