@@ -1,5 +1,5 @@
 const {createUser} = require('../../queries/auth');
-const {hashs,sendMail} = require('../../helpers');
+const {hashs, mail} = require('../../helpers');
 
 module.exports = db => async (req,res,next) => {
 
@@ -16,8 +16,13 @@ module.exports = db => async (req,res,next) => {
 
     if (result === false) return next({error: new Error('Algo ha ido mal en el alta de usuario')});
 
-    const resultMail = await sendMail(email,confirmationToken);
+    const resultMail = await mail.sendMail(email,confirmationToken);
+
+    if (resultMail === false) return next({error: new Error('Algo ha ido mal en el envío de correo')});
+
     
+
+
 
     res.status(200).json({
         sucess: true,
