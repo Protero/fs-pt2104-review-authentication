@@ -39,7 +39,25 @@ const getUser = async (db, email, fn) => {
 
 };
 
+const confirmUser = async (db, confirmationToken) => {
+    try {
+        return await db.query(sql
+            `UPDATE users
+            SET
+                active = true,
+                confirmation_token = null
+            WHERE
+                confirmation_token like ${confirmationToken};
+            `
+        );
+    } catch (error) {
+        console.info('error at "confirmUser" query: ', error.message);
+        return false;
+    }
+}
+
 module.exports = {
     createUser,
-    getUser
+    getUser,
+    confirmUser,
 };
