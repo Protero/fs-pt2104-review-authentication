@@ -18,11 +18,9 @@ module.exports = db => async (req,res,next) => {
 
     const resultMail = await mail.sendMail(email,confirmationToken);
 
-    if (resultMail === false) return next({error: new Error('Algo ha ido mal en el envío de correo')});
+    if (resultMail === false) return next({error: new Error('Algo ha ido mal en el envío del correo')});
 
-    
-
-
+     
 
     res.status(200).json({
         sucess: true,
