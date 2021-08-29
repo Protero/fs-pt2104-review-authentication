@@ -47,7 +47,8 @@ const confirmUser = async (db, confirmationToken) => {
                 active = true,
                 confirmation_token = null
             WHERE
-                confirmation_token like ${confirmationToken};
+                confirmation_token like ${confirmationToken}
+            RETURNING email, username;
             `
         );
     } catch (error) {
