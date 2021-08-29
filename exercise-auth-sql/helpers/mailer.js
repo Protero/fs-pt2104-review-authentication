@@ -17,6 +17,28 @@ const sendMail = async (to, confirmationToken) => {
     return await transporter.sendMail(template);
 };
 
+const templateConfirm = (to, username) => ({
+    from : process.env.MAIL_USER,
+    to: to,
+    subject: 'Datos de acceso',
+    html: `
+        <h3>Registro confirmado</h3>
+        <p>Sus datos de acceso son:</p>
+        <ul>
+            <li>email: ${to}</li>
+            <li>username: ${username}</li>
+        </ul>
+        <p>Ya puede acceder a la plataforma</p>
+        </p>
+    `
+});
+
+const sendMailFinal = async (to, username) => {
+    const template = templateConfirm(to, username);
+    return await transporter.sendMail(template);
+};
+
 module.exports = {
     sendMail,
+    sendMailFinal,
 };
